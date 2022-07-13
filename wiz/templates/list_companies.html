@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Create Service {% endblock title %}
+
+{% block content %}
+<!-- Section-->
+<section class="py-5">
+  <div class="container px-4 px-lg-5 mt-5">
+      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        {% for company in companies %}
+          <div class="col mb-5">
+            <div class="card" style="width: 18rem;">
+              <img src="{{ company.image.url }}"" class="card-img-top" alt="Image" style="height:300px" />
+              <div class="card-body">
+                <h5 class="card-title"> {{ company.company }} </h5>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{ company.address }}</li>
+              </ul>
+              <a href="/companies/{{ company.id }}/update/"><button type="submit" class="btn btn-success">Editar</button></a>
+              <a href="/companies/{{ company.id }}/delete/"><button type="submit" class="btn btn-danger">Eliminar</button></a>
+            </div>
+              
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+  </div>
+</section>
+<div class="d-flex align-items-center justify-content-center">
+  <a href=" {% url 'create-company' %} "><button type="submit" class="btn btn-success">Adicionar Pagina</button></a>
+</div>
+</body>
+</html>
+
+{% endblock content %}
+
+
+

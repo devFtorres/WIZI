@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Create Service {% endblock title %}
+
+{% block content %}
+<!-- Section-->
+<section class="py-5">
+  <div class="container px-4 px-lg-5 mt-5">
+      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        {% for emp in employers %}
+          <div class="col mb-5">
+            <div class="card" style="width: 18rem;">
+              <img src="{{ emp.image.url }}"" class="card-img-top" alt="Image" style="height:300px" />
+              <div class="card-body">
+                <h5 class="card-title"> {{ emp.name }} </h5>  
+                <a href="/employers/{{ emp.id }}/update/"><button type="submit" class="btn btn-success">Editar</button></a>
+                <a href="/employers/{{ emp.id }}/delete/"><button type="submit" class="btn btn-danger">Eliminar</button></a>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+  </div>
+</section>
+
+<div class="d-flex align-items-center justify-content-center">
+  <a href=" {% url 'create-employer' %} "><button type="submit" class="btn btn-success">Adicionar Empregado</button></a>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} WIZI {% endblock title %}
+
+{% block content %}
+<!-- Section-->
+<section class="py-5">
+  <div class="container px-4 px-lg-5 mt-5">
+      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        {% for product in products %}
+          <div class="col mb-5">
+            <div class="card" style="width: 18rem;">
+              <img src="{{ product.image.url }}"" class="card-img-top" alt="Image" style="height:300px" />
+              <div class="card-body">
+                <h5 class="card-title"> {{ product.desc }} </h5>  
+                <a href="/products/{{ product.id }}/update/"><button type="submit" class="btn btn-success">Editar</button></a>
+                <a href="/products/{{ product.id }}/delete/"><button type="submit" class="btn btn-danger">Eliminar</button></a>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+  </div>
+</section>
+
+
+<div class="d-flex align-items-center justify-content-center">
+  <a href=" {% url 'create-product' %} "><button type="submit" class="btn btn-success">Adicionar Produto</button></a>
+</div>
+</section>
+
+{% endblock content %}

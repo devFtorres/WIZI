@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} WIZI {% endblock title %}
+
+{% block content %}
+<!-- Section-->
+<section class="py-5">
+  <div class="container px-4 px-lg-5 mt-5">
+      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        {% for plan in plans %}
+          <div class="col mb-5">
+            <div class="card" style="width: 18rem;">
+                <h5 class="card-title"> {{ plan.title }} </h5> 
+              <div class="card-body">
+                <h5 class="card-title"> {{ plan.desc }} </h5>  
+                <h5 class="card-title"> {{ plan.price }} </h5>
+                <a href="/plans/{{ plan.id }}/update/"><button type="submit" class="btn btn-success">Editar</button></a>
+                <a href="/plans/{{ plan.id }}/delete/"><button type="submit" class="btn btn-danger">Eliminar</button></a>
+
+              </div>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+  </div>
+</section>
+
+<div class="d-flex align-items-center justify-content-center">
+  <a href=" {% url 'create-plan' %} "><button type="submit" class="btn btn-success">Adicionar plano</button></a>
+</div>
+
+{% endblock content %}
