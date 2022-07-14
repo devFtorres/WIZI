@@ -20,14 +20,15 @@ def contact(request):
         name = request.POST.get('name')
         email = request.POST.get('email')
         message = request.POST.get('message')
-
+        toemail = 'wizi.easy2022@gmail.com'
+        message = message +  ' \ '  + email + ' \ ' + name
         send_mail(
-        'WIZI - Easy to build webpage', #subject
-        message, #message
-        'fjptorres29@gmail.com', #from
-        [email], #to email
+            'WIZI - Easy to build webpage', #subject
+            message, #message
+            email, #from
+            [toemail], #to email
 
-    )
+        )
         return render (request, "contact.html", {'name': name})
     else:
         return render (request, "contact.html")
