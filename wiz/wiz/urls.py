@@ -44,7 +44,7 @@ urlpatterns = [
 
     path('', home),
     path('about/', about),
-    path('contact/', contact),
+    path('contact/', contact, name="contact"),
     path('conditions/', conditions),
 
 

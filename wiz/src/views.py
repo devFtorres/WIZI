@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .forms import CompanyForm, SeparatorForm, EmployerForm, ProductForm, PlanForm
 from django.contrib.auth.decorators import login_required
 from src.models import Company, Separator, Employer, Carroussel, Plan, Product
+from django.core.mail import send_mail
 
 
 
@@ -14,7 +15,30 @@ def about(request):
     return render (request, "about.html")
 
 def contact(request):
-    return render (request, "contact.html")
+
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        send_mail(
+        'WIZI - Easy to build webpage', #subject
+        message, #message
+        'fjptorres29@gmail.com', #from
+        [email], #to email
+
+    )
+        return render (request, "contact.html", {'name': name})
+    else:
+        return render (request, "contact.html")
+    
+
+    
+    
+    
+
+
+    
 
 def conditions(request):
     return render (request, "conditions.html")
@@ -357,7 +381,6 @@ def my_wiz_view(request, slug):
     plans = Plan.objects.filter(company=company)
     products = Product.objects.filter(company=company)
 
-
     context = {
         "company": company,
         "separators": separators,
@@ -367,4 +390,30 @@ def my_wiz_view(request, slug):
         "plans": plans,
     }
 
-    return render(request, "my_wiz_view.html", context)
+
+
+    if request.method == "POST":
+        sub = request.POST.get('sub')
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        mailf = request.POST.get('mailcompany')
+
+        send_mail(
+        sub, #subject
+        message+name, #message
+        mailf, #from
+        [email], #to email
+
+    )
+        return render(request, "my_wiz_view.html", context)
+    else:
+        return render(request, "my_wiz_view.html", context)
+
+
+
+
+
+    
+
+    
