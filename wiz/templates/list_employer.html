@@ -4,27 +4,40 @@
 {% block title %} Create Service {% endblock title %}
 
 {% block content %}
-<!-- Section-->
-<section class="py-5">
-  <div class="container px-4 px-lg-5 mt-5">
-      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-        {% for emp in employers %}
-          <div class="col mb-5">
-            <div class="card" style="width: 18rem;">
-              <img src="{{ emp.image.url }}"" class="card-img-top" alt="Image" style="height:300px" />
-              <div class="card-body">
-                <h5 class="card-title"> {{ emp.name }} </h5>  
-                <a href="/employers/{{ emp.id }}/update/"><button type="submit" class="btn btn-success">Editar</button></a>
-                <a href="/employers/{{ emp.id }}/delete/"><button type="submit" class="btn btn-danger">Eliminar</button></a>
-          </div>
-        {% endfor %}
-        </div>
-      </div>
-  </div>
-</section>
+    {% if company != None %}
+      {% if employers|length == 0 %}
+          <h1>Nao tem empregados ainda ...</h1>
 
-<div class="d-flex align-items-center justify-content-center">
-  <a href=" {% url 'create-employer' %} "><button type="submit" class="btn btn-success">Adicionar Empregado</button></a>
-</div>
+      {% else %}
+          {% for employer in employers %}
+              <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="member d-flex align-items-start">
+                <div class="pic"><img src="{{ employer.image.url }}" class="img-fluid" alt="" style="height: 150px; width: 150px"></div>
+                <div class="member-info">
+                    <h4>{{ employer.name }}</h4>
+                    <span>{{ employer.funcion }}</span>
+                    <div class="social">
+                    <a href="{{ employer.facebook }}"><i class="ri-facebook-fill"></i></a>
+                    <a href="{{ employer.instagram }}"><i class="ri-instagram-fill"></i></a>
+                    </div>
+                </div>
+                </div>
+                <a href="/employers/{{ employer.id }}/update/"><button type="submit" class="btn btn-success">Editar</button></a>
+                <a href="/employers/{{ employer.id }}/delete/"><button type="submit" class="btn btn-danger">Eliminar</button></a>
+              </div>
+          {% endfor %}
+      {% endif %}
+
+          <div class="d-flex align-items-center justify-content-center">
+            <a href=" {% url 'create-employer' %} "><button type="submit" class="btn btn-success">Adicionar Empregado</button></a>
+          </div>
+    {% else %}
+        <h1>E necessario ter uma pagina para adicionar empregados</h1>
+        <a href="/companies/"><button type="submit" class="btn btn-success">Gerir Pagina</button></a>
+
+    {% endif %}
+
 
 {% endblock content %}
+
+

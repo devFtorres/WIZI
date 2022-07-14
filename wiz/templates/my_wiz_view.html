@@ -36,14 +36,34 @@
   </head>
   
   <body>
-        <!-- ======= Hero Section ======= -->
-        <section class="d-flex align-items-between text-center" style="height: 170px; background-color: black">
-      
-          <div class="pr-50"><a class="navbar-brand" href="/"> <img src="{% static 'wizlogow.png' %}" style="width: 85px; height: 65px;"/> </a></div>
-            <div id="heroCarousel" data-bs-interval="5000" class="justify-content-center align-items-right px-50" data-bs-ride="carousel">
-                <h2 class="animate__animated animate__fadeInDown mb-2" style="color: white">{{company.company}}</h2>
-            </div>
-        </section>
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+          <a class="navbar-brand" href="/"> <img src="{% static 'wizilogo.png' %}" style="width: 45px; height: 45px;"/> </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav align-items-center justify-content-center">
+              <h2 class="animate__animated animate__fadeInDown mb-2" style="color: white">{{company.company}}</h2>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <div class="pr-50"></div>
+            </form>
+          </div>
+        </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
         
         <!-- End Hero -->
@@ -69,7 +89,6 @@
 {% for sep in separators %}
 <div class="d-flex justify-content-center my-4">
   <div class="w-75 p-3 " style="background-color: #eee;">
-    
     <div class="jumbotron jumbotron-fluid">
       <div class="container d-flex justify-content-between align-items-center">
         {% if sep.place == "LEFT" and sep.image %}
@@ -116,7 +135,7 @@
                     <img src="{{product.image.url}}" class="card-img-top">
                     <div class="card-body">
                       <h5 class="card-title">{{product.price}}</h5>
-                      <p class="card-text">{{product.desc}}</p>
+                      <p class="card-text">{{product.name}}</p>
                     </div>
                   </div>
                 </div>
@@ -129,29 +148,29 @@
       {% endif %}
       {% if plans|length > 0 %}
       <!-- ======= Pricing Section ======= -->
-      <section id="pricing" class="pricing">
-        <div class="container" data-aos="fade-up">
-  
-          <div class="section-title">
-            <h2>Os nosso serviços</h2>
-          </div>
-  
-          <div class="row">
-            {% for plan in plans %}
+        <section id="pricing" class="pricing">
+          <div class="container" data-aos="fade-up">
+    
+            <div class="section-title">
+              <h2>Os nosso serviços</h2>
+            </div>
+    
+            <div class="row">
+              {% for plan in plans %}
 
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="box">
-                    <h3>{{plan.title}}</h3>
-                    <h4><sup>€</sup>{{plan.price}}</span></h4>
-                    <p>{{ plan.desc }}</p>
-                    </div>
-                </div>
-            
-            
-            {% endfor %}
-  
-        </div>
-      </section>
+                  <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                      <div class="box">
+                      <h3>{{plan.title}}</h3>
+                      <h4><sup>€</sup>{{plan.price}}</span></h4>
+                      <p>{{ plan.desc }}</p>
+                      </div>
+                  </div>
+              
+              
+              {% endfor %}
+    
+          </div>
+        </section>
       {% endif %}
 
       {% if employers|length > 0 %}
@@ -217,7 +236,7 @@
                 <div class="phone">
                   <i class="bi bi-phone"></i>
                   <h4>Telefone</h4>
-                  <p>{{ company.cell }}</p>
+                  <p>{{ company.phone }}</p>
                 </div>
   
               </div>

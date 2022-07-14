@@ -2,6 +2,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from src.views import (listing_companies, 
+                        list_all_companies,
                         retrieve_company, 
                         company_create, 
                         company_update,
@@ -48,6 +49,7 @@ urlpatterns = [
 
 
     path('companies/', listing_companies),
+    path('all_companies/', list_all_companies),
     path('companies/<pk>/', retrieve_company),
     path('companies-create', company_create, name="create-company"),
     path('companies/<pk>/update/', company_update),

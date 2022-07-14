@@ -4,30 +4,47 @@
 {% block title %} WIZI {% endblock title %}
 
 {% block content %}
-<!-- Section-->
-<section class="py-5">
-  <div class="container px-4 px-lg-5 mt-5">
-      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-        {% for plan in plans %}
-          <div class="col mb-5">
-            <div class="card" style="width: 18rem;">
-                <h5 class="card-title"> {{ plan.title }} </h5> 
-              <div class="card-body">
-                <h5 class="card-title"> {{ plan.desc }} </h5>  
-                <h5 class="card-title"> {{ plan.price }} </h5>
-                <a href="/plans/{{ plan.id }}/update/"><button type="submit" class="btn btn-success">Editar</button></a>
-                <a href="/plans/{{ plan.id }}/delete/"><button type="submit" class="btn btn-danger">Eliminar</button></a>
 
-              </div>
+{% if company != None %}
+      {% if plans|length == 0 %}
+        <h1>Nao tem planos ainda ...</h1>
+        <a href=" {% url 'create-plan' %} "><button type="submit" class="btn btn-success">Adicionar plano</button></a>
+      {% else %}
+
+        <section id="pricing" class="pricing">
+          <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+              <h2>Os nosso serviços</h2>
+            </div>
+
+            <div class="row">
+              {% for plan in plans %}
+
+                  <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                      <div class="box">
+                      <h3>{{plan.title}}</h3>
+                      <h4><sup>€</sup>{{plan.price}}</span></h4>
+                      <p>{{ plan.desc }}</p>
+                      </div>
+                  </div>
+                  <a href="/plans/{{ plan.id }}/update/"><button type="submit" class="btn btn-success">Editar</button></a>
+                  <a href="/plans/{{ plan.id }}/delete/"><button type="submit" class="btn btn-danger">Eliminar</button></a>
+              
+              {% endfor %}
+
           </div>
-        {% endfor %}
-        </div>
-      </div>
-  </div>
-</section>
-
-<div class="d-flex align-items-center justify-content-center">
-  <a href=" {% url 'create-plan' %} "><button type="submit" class="btn btn-success">Adicionar plano</button></a>
-</div>
+          <div class="d-flex align-items-center justify-content-center">
+            <a href=" {% url 'create-plan' %} "><button type="submit" class="btn btn-success">Adicionar plano</button></a>
+          </div>
+        </section>
+      {% endif %}
+    {% else %}
+      <h1>E necessario ter uma pagina para adicionar produtos</h1>
+      <a href="/companies/"><button type="submit" class="btn btn-success">Gerir pagina</button></a>
+    {% endif %}
 
 {% endblock content %}
+
+
+

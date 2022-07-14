@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-lg bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/"> <img src="{% static 'wizlogow.png' %}" style="width: 85px; height: 65px;"/> </a>
+    <a class="navbar-brand" href="/"> <img src="{% static 'wizilogo.png' %}" style="width: 65px; height: 65px;"/> </a>
     <button
       class="navbar-toggler"
       type="button"
@@ -22,6 +22,9 @@
         <li class="nav-item">
           <a class="nav-link text-light" href="/contact/">Contacto</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/all_companies/">Empresas</a>
+        </li>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle text-light"
@@ -38,21 +41,11 @@
             <li><a class="dropdown-item" href="/employers/">Empregados</a></li>
             <li><a class="dropdown-item" href="/products/">Produtos</a></li>
             <li><a class="dropdown-item" href="/plans/">Planos</a></li>
-            <li><a class="dropdown-item" href="/companies/">As suas paginas</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="/">MyWiz</a></li>
+            <li><a class="dropdown-item" href="/companies/">My WIZI</a></li>
           </ul>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button class="btn btn-light" type="submit">Procurar</button>
-      </form>
+    
       <form class="d-flex px-4" >
         {% if request.user.is_authenticated %}
               <a href=" {% url 'account_logout' %} " class="ui item">

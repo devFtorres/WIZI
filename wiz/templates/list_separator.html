@@ -1,30 +1,43 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %} Create Service {% endblock title %}
+{% block title %} WIZI {% endblock title %}
 
 {% block content %}
-<!-- Section-->
-<section class="py-5">
-  <div class="container px-4 px-lg-5 mt-5">
-      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-        {% for sep in separators %}
-          <div class="col mb-5">
-            <div class="card" style="width: 18rem;">
-              <img src="{{ sep.image.url }}"" class="card-img-top" alt="Image" style="height:300px" />
-              <div class="card-body">
-                <h5 class="card-title"> {{ sep.title }} </h5> 
-                <a href="/separators/{{ sep.id }}/update/"><button type="submit" class="btn btn-success">Editar</button></a>
-                <a href="/separators/{{ sep.id }}/delete/"><button type="submit" class="btn btn-danger">Eliminar</button></a>
+
+{% if company == NULL %}
+    <h1>E necessario ter uma pagina para adicionar empregados</h1>
+    <a href="/companies/"><button type="submit" class="btn btn-success">A minha pagina</button></a>
+{% else %}
+    {% for sep in separators %}
+    <div class="d-flex justify-content-center my-4">
+      <div class="w-75 p-3 " style="background-color: #eee;">
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container d-flex justify-content-between align-items-center">
+            {% if sep.place == "LEFT" and sep.image %}
+            <div class="px-3"><img src="{{sep.image.url}}" style="width: 300px; height:300px"/></div>
+            {% endif %}
+            <div class="d-flex flex-column">
+            <h1 class="display-4">{{sep.title}}</h1>
+            <p class="lead">{{sep.desc}}</p>
+            </div>
+            {% if sep.place == "RIGHT" and sep.image %}
+            <div class="px-3"><img src="{{sep.image.url}}" style="width: 300px; height:300px"/></div>
+            {% endif %}
           </div>
-        {% endfor %}
         </div>
+        </br>
+      <div class="d-flex">
+        <a href="/separators/{{ sep.id }}/update/"><button type="submit" class="btn btn-success mx-2">Editar</button></a>
+        <a href="/separators/{{ sep.id }}/delete/"><button type="submit" class="btn btn-danger mx-2">Eliminar</button></a>
       </div>
-  </div>
-
-  <div class="d-flex align-items-center justify-content-center">
-    <a href=" {% url 'create-separator' %} "><button type="submit" class="btn btn-success">Adicionar Componente</button></a>
-  </div>
-</section>
-
+      </div>
+    </div>
+    {% endfor %}
+    <div class="d-flex align-items-center justify-content-center">
+      <a href=" {% url 'create-separator' %} "><button type="submit" class="btn btn-success">Adicionar Componente</button></a>
+    </div>
+{% endif %}
 {% endblock content %}
+
+

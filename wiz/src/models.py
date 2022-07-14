@@ -6,13 +6,11 @@ from django.contrib.auth.models import User
 
 
 class Company(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     company = models.CharField(max_length=30, blank=True, null=True, unique=True)
-    desc = models.TextField(max_length=600, blank=True, null=True)
-    image = models.ImageField(default="default.png")
     created = models.DateTimeField(auto_now_add=True)
     about = models.TextField(max_length=800, blank=True, null=True)
-    cell = models.IntegerField(blank=True, null=True)
+    phone = models.IntegerField(blank=True, null=True)
     address = models.CharField(max_length=100)
     email = models.EmailField(blank=True, null=True)
     slug = models.SlugField(null=False)
@@ -22,22 +20,17 @@ class Company(models.Model):
     def __str__(self):
         return self.company
 
-
 class Product(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, default=None)
     image = models.ImageField(default="default.png")
     price = models.FloatField()
-    desc = models.TextField(max_length=200, blank=True, null=True)
+    name = models.CharField(max_length=50, blank=True, null=True)
 
 class Plan(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, default=None)
     title = models.CharField(max_length=25)
     price = models.FloatField()
     desc = models.TextField(max_length=300, blank=True, null=True)
-
-
-
-    
 
 class Carroussel(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, default=None)
@@ -48,13 +41,11 @@ class Carroussel(models.Model):
     def __str__(self):
         return self.title
 
-
 POS_CHOICES = (
         ('RIGHT', 'RIGHT'),
         ('LEFT', 'LEFT'),
         ('NOIMAGE', 'NOIMAGE')
     )
-
 
 class Separator(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, default=None)

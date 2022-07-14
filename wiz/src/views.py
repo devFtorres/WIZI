@@ -20,9 +20,18 @@ def conditions(request):
     return render (request, "conditions.html")
 
 #COMPANIES
+
+def list_all_companies(request):
+    companies = Company.objects.all()
+    context = {
+        "companies": companies,
+    }
+    return render (request, "list_all_companies.html", context)
+
+
 @login_required
 def listing_companies(request):
-    companies = Company.objects.all()
+    companies = Company.objects.filter(user=request.user)
     context = {
         "companies": companies,
 
@@ -80,10 +89,17 @@ def company_delete(request, pk):
 
 @login_required
 def listing_separator(request):
-    company = Company.objects.get(user=request.user)
+    
+    try:
+        company = Company.objects.get(user=request.user)
+    except Company.DoesNotExist:
+        company = None
+
     separators = Separator.objects.filter(company=company)
+
     context = {
         "separators": separators,
+        "company": company,
 
     }
     return render (request, "list_separator.html", context)
@@ -139,9 +155,16 @@ def separator_delete(request, pk):
 
 @login_required
 def listing_employer(request):
-    employers = Employer.objects.all()
+
+    try:
+        company = Company.objects.get(user=request.user)
+    except Company.DoesNotExist:
+        company = None
+    
+    employers = Employer.objects.filter(company=company)
     context = {
         "employers": employers,
+        "company": company,
 
     }
     return render (request, "list_employer.html", context)
@@ -197,9 +220,16 @@ def employer_delete(request, pk):
 
 @login_required
 def listing_product(request):
-    products = Product.objects.all()
+
+    try:
+        company = Company.objects.get(user=request.user)
+    except Company.DoesNotExist:
+        company = None
+
+    products = Product.objects.filter(company=company)
     context = {
         "products": products,
+        "company": company,
 
     }
     return render (request, "list_product.html", context)
@@ -255,9 +285,16 @@ def product_delete(request, pk):
 
 @login_required
 def listing_plan(request):
-    plans = Plan.objects.all()
+
+    try:
+        company = Company.objects.get(user=request.user)
+    except Company.DoesNotExist:
+        company = None
+
+    plans = Plan.objects.filter(company=company)
     context = {
         "plans": plans,
+        "company": company,
 
     }
     return render (request, "list_plan.html", context)
@@ -308,11 +345,6 @@ def plan_delete(request, pk):
     plan = Plan.objects.get(id=pk)
     plan.delete()
     return redirect("/plans/")
-
-
-
-
-
 
 
 #WEBPAGE

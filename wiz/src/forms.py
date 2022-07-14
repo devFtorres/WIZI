@@ -1,3 +1,4 @@
+from tkinter import Widget
 from django.forms import ModelForm
 from .models import Company, Employer, Separator, Carroussel, Plan, Product
 
@@ -7,10 +8,8 @@ class CompanyForm(ModelForm):
         model = Company
         fields = [
             "company",
-            "desc",
-            "image",
             "about",
-            "cell",
+            "phone",
             "address",
             "email",
             "slug",
@@ -58,7 +57,7 @@ class ProductForm(ModelForm):
         fields = [
                 "image",
                 "price",
-                "desc",
+                "name",
             ]
 
 

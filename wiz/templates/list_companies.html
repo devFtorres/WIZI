@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %} Create Service {% endblock title %}
+{% block title %} WIZI {% endblock title %}
 
 {% block content %}
 <!-- Section-->
@@ -11,7 +11,7 @@
         {% for company in companies %}
           <div class="col mb-5">
             <div class="card" style="width: 18rem;">
-              <img src="{{ company.image.url }}"" class="card-img-top" alt="Image" style="height:300px" />
+              <img src="{{ company.logo.url }}"" class="card-img-top" alt="Image" style="height:300px" />
               <div class="card-body">
                 <h5 class="card-title"> {{ company.company }} </h5>
               </div>
@@ -28,9 +28,11 @@
       </div>
   </div>
 </section>
-<div class="d-flex align-items-center justify-content-center">
-  <a href=" {% url 'create-company' %} "><button type="submit" class="btn btn-success">Adicionar Pagina</button></a>
-</div>
+{% if companies|length == 0 %}
+  <div class="d-flex align-items-center justify-content-center">
+    <a href=" {% url 'create-company' %} "><button type="submit" class="btn btn-success">Adicionar Pagina</button></a>
+  </div>
+{% endif %}
 </body>
 </html>
 
