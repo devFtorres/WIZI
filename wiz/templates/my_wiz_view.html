@@ -134,7 +134,7 @@
                 <div class="card" style="width: 18rem;">
                     <img src="{{product.image.url}}" class="card-img-top">
                     <div class="card-body">
-                      <h5 class="card-title">{{product.price}}</h5>
+                      <h5 class="card-title">{{product.price}} €</h5>
                       <p class="card-text">{{product.name}}</p>
                     </div>
                   </div>
@@ -161,7 +161,7 @@
                   <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
                       <div class="box">
                       <h3>{{plan.title}}</h3>
-                      <h4><sup>€</sup>{{plan.price}}</span></h4>
+                      <h4><sup>€</sup>{{plan.price}} €</span></h4>
                       <p>{{ plan.desc }}</p>
                       </div>
                   </div>
@@ -184,16 +184,12 @@
   
           <div class="row">
             {% for employer in employers  %}
-                <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="member d-flex align-items-start">
                     <div class="pic"><img src="{{ employer.image.url }}" class="img-fluid" alt=""></div>
                     <div class="member-info">
                         <h4>{{ employer.name }}</h4>
                         <span>{{ employer.funcion }}</span>
-                        <div class="social">
-                        <a href="{{ employer.facebook }}"><i class="ri-facebook-fill"></i></a>
-                        <a href="{{ employer.instagram }}"><i class="ri-instagram-fill"></i></a>
-                        </div>
                     </div>
                     </div>
                 </div>

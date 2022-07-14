@@ -33,13 +33,6 @@ def contact(request):
         return render (request, "contact.html")
     
 
-    
-    
-    
-
-
-    
-
 def conditions(request):
     return render (request, "conditions.html")
 
@@ -93,7 +86,7 @@ def company_update(request, pk):
     company = Company.objects.get(id=pk)
     form = CompanyForm(instance=company)
     if request.method == "POST":
-        form = CompanyForm(request.POST, instance=company)
+        form = CompanyForm(request.POST, request.FILES, instance=company)
         if form.is_valid():
             form.save()
             return redirect("/companies/")
@@ -142,7 +135,7 @@ def separator_create(request):
     form = SeparatorForm()
     company = Company.objects.get(user=request.user)
     if request.method == "POST":
-        form = SeparatorForm(request.POST )
+        form = SeparatorForm(request.POST,  request.FILES)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.company = company
@@ -159,7 +152,7 @@ def separator_update(request, pk):
     separator = Separator.objects.get(id=pk)
     form = SeparatorForm(instance=separator)
     if request.method == "POST":
-        form = SeparatorForm(request.POST, instance=separator)
+        form = SeparatorForm(request.POST, request.FILES, instance=separator)
         if form.is_valid():
             form.save()
             return redirect("/separators/")
@@ -224,7 +217,7 @@ def employer_update(request, pk):
     employer = Employer.objects.get(id=pk)
     form = EmployerForm(instance=employer)
     if request.method == "POST":
-        form = EmployerForm(request.POST, instance=employer)
+        form = EmployerForm(request.POST, request.FILES, instance=employer)
         if form.is_valid():
             form.save()
             return redirect("/employers/")
@@ -289,7 +282,7 @@ def product_update(request, pk):
     product = Product.objects.get(id=pk)
     form = ProductForm(instance=product)
     if request.method == "POST":
-        form = ProductForm(request.POST, instance=product)
+        form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
             return redirect("/products/")

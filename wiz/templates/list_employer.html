@@ -9,25 +9,23 @@
           <h1>Nao tem empregados ainda ...</h1>
 
       {% else %}
-          {% for employer in employers %}
-              <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="member d-flex align-items-start">
-                <div class="pic"><img src="{{ employer.image.url }}" class="img-fluid" alt="" style="height: 150px; width: 150px"></div>
-                <div class="member-info">
-                    <h4>{{ employer.name }}</h4>
-                    <span>{{ employer.funcion }}</span>
-                    <div class="social">
-                    <a href="{{ employer.facebook }}"><i class="ri-facebook-fill"></i></a>
-                    <a href="{{ employer.instagram }}"><i class="ri-instagram-fill"></i></a>
+          <div class="row">
+            {% for employer in employers  %}
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="member d-flex align-items-start">
+                    <div class="pic"><img src="{{ employer.image.url }}" class="img-fluid" alt="" style="width: 150px; height:150px"></div>
+                    <div class="member-info">
+                        <h4>{{ employer.name }}</h4>
+                        <span>{{ employer.funcion }}</span>
                     </div>
-                </div>
+                    </div>
                 </div>
                 <a href="/employers/{{ employer.id }}/update/"><button type="submit" class="btn btn-success">Editar</button></a>
                 <a href="/employers/{{ employer.id }}/delete/"><button type="submit" class="btn btn-danger">Eliminar</button></a>
-              </div>
+              
           {% endfor %}
       {% endif %}
-
+    </div>
           <div class="d-flex align-items-center justify-content-center">
             <a href=" {% url 'create-employer' %} "><button type="submit" class="btn btn-success">Adicionar Empregado</button></a>
           </div>
